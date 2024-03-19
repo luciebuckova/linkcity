@@ -1,0 +1,155 @@
+.u-clearfix::after
+  clear: both
+  content: ''
+  display: table
+
+.u-container
+  margin-left: auto
+  margin-right: auto
+  padding-left: 20px
+  padding-right: 20px
+  width: 100%
+
+[class*="u-frame"]
+  margin-left: auto
+  margin-right: auto
+  width: 100%
+
+.u-frame
+  max-width: calc(var(--sizeContentWidth) + var(--sizeContentOffset) * 2)
+  padding-left: var(--sizeContentOffset)
+  padding-right: var(--sizeContentOffset)
+
+  & &
+    padding-left: 0
+    padding-right: 0
+
+  &--narrow
+    max-width: calc(var(--sizeContentWidthNarrow) + var(--sizeContentOffset) * 2)
+    padding-left: var(--sizeContentOffset)
+    padding-right: var(--sizeContentOffset)
+
+  &--medium
+    max-width: calc(var(--sizeContentWidthMedium) + var(--sizeContentOffset) * 2)
+    padding-left: var(--sizeContentOffset)
+    padding-right: var(--sizeContentOffset)
+
+  &--wide
+    max-width: calc(var(--sizeContentWidthWide) + var(--sizeContentOffset) * 2)
+    padding-left: var(--sizeContentOffset)
+    padding-right: var(--sizeContentOffset)
+
+.u-fullWidth
+  width: 100%
+
+.u-block
+  display: block
+
+.u-flex
+  display: flex
+
+[v-cloak],
+.u-hidden
+  display: none !important
+
+.u-hiddenVisually
+  border: 0
+  clip: rect(0 0 0 0)
+  height: 1px
+  margin: -1px
+  overflow: hidden
+  padding: 0
+  position: absolute
+  width: 1px
+
+.u-hiddenOverflow
+  overflow: hidden
+
+.u-invisibleScrollBar
+  -ms-overflow-style: none
+  scrollbar-width: none
+
+  &::-webkit-scrollbar
+    display: none
+
+.u-customScrollBar
+  scrollbar-color: rgba(0,0,0,.2) transparent
+  scrollbar-width: thin
+
+  &::-webkit-scrollbar
+    width: .4rem
+
+  &::-webkit-scrollbar-track
+    background: transparent
+
+  &::-webkit-scrollbar-thumb
+    background: rgba(0,0,0,.2)
+    transition: all .25s ease-in-out
+
+  &::-webkit-scrollbar-thumb:hover
+    background: rgba(0,0,0,.4)
+
+.u-textCenter
+  text-align: center
+
+.u-flexJustifyStart
+  justify-content: flex-start
+
+.u-flexJustifyEnd
+  justify-content: flex-end
+
+.u-flexJustifyCenter
+  justify-content: center
+
+.u-flexJustifyBetween
+  justify-content: space-between
+
+.u-flexJustifyAround
+  justify-content: space-around
+
+.u-flexAlignItemsStart
+  align-items: flex-start
+
+.u-flexAlignItemsEnd
+  align-items: flex-end
+
+.u-flexAlignItemsCenter
+  align-items: center
+
+.u-spanRow
+  grid-column: 1 / -1
+
+.u-uppercase
+  text-transform: uppercase
+
+.u-lowercase
+  text-transform: lowercase
+
+.u-underline
+  text-decoration: underline
+
+  @include on-event()
+    text-decoration: none
+
+[data-tooltip]
+  position: relative
+
+  &:before
+    content: attr(data-tooltip)
+    display: block
+    position: absolute
+    inset: auto auto calc(100% + .5rem) 50%
+    padding: .25rem .5rem
+    font-size: .75rem
+    font-weight: 500
+    white-space: nowrap
+    color: var(--colorLight)
+    background: rgba(#000, .96)
+    border-radius: .25rem
+    transform: translateX(-50%)
+    opacity: 0
+    pointer-events: none
+    transition: var(--animationFast)
+
+  &:hover:before
+    opacity: 1

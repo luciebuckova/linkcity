@@ -1,0 +1,292 @@
+@use "sass:math";
+
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return math.div($number, ($number * 0 + 1));
+    }
+
+    @return $number;
+}
+
+// replace substring with another string
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+    @return $string;
+}
+
+@function alpha($color, $opacity){
+    $color: str-replace($color, 'var(');
+    $color: str-replace($color, ')');
+    $color-h: var(#{$color+'-h'});
+    $color-s: var(#{$color+'-s'});
+    $color-l: var(#{$color+'-l'});
+    @return hsla($color-h, calc(#{$color-s} * 1%), calc(#{$color-l} * 1%), $opacity);
+}
+
+@function lightness($color, $lightnessMultiplier){
+    $color: str-replace($color, 'var(');
+    $color: str-replace($color, ')');
+    $color-h: var(#{$color+'-h'});
+    $color-s: var(#{$color+'-s'});
+    $color-l: var(#{$color+'-l'});
+    @return hsl($color-h, calc(#{$color-s} * 1%), calc(#{$color-l} * #{$lightnessMultiplier} * 1%));
+}
+
+@function saturation($color, $saturationMultiplier){
+    $color: str-replace($color, 'var(');
+    $color: str-replace($color, ')');
+    $color-h: var(#{$color+'-h'});
+    $color-s: var(#{$color+'-s'});
+    $color-l: var(#{$color+'-l'});
+    @return hsl($color-h, calc(#{$color-s} * #{$saturationMultiplier} * 1%), calc(#{$color-l} * 1%));
+}
+
+@function text-contrast($color){
+    $color: str-replace($color, 'var(');
+    $color: str-replace($color, ')');
+    $color-l: var(#{$color+'-l'});
+    @return hsl(0, 0%, calc((#{$color-l} - 60) * -100%));
+}
+
+@function text-contrast-sass($n) {
+    $color-brightness: round((red($n) * 299) + (green($n) * 587) + (blue($n) * 114) / 1000);
+    $light-color: round((red(#ffffff) * 299) + (green(#ffffff) * 587) + (blue(#ffffff) * 114) / 1000);
+
+    @if abs($color-brightness) < ($light-color/2) {
+        @return white;
+    }
+
+    @else {
+        @return black;
+    }
+}
+
+
+/// Slice `$list` between `$start` and `$end` indexes
+///
+/// @access private
+///
+/// @param {List} $list - List to slice
+/// @param {Number} $start [1] - Start index
+/// @param {Number} $end [length($list)] - End index
+///
+/// @return {List} Sliced list
+///
+@function slice($list, $start: 1, $end: length($list)) {
+    @if length($list) < 1 or $start > $end {
+        @return ();
+    }
+
+    $result: ();
+
+    @for $i from $start through $end {
+        $result: append($result, nth($list, $i));
+    }
+
+    @return $result;
+}
+
+/// Function with no `@return` called next to `@warn` in Sass 3.3
+/// to trigger a compiling error and stop the process.
+///
+@function noop() {}
+
+///
+/// Log a message either with `@error` if supported
+/// else with `@warn`, using `feature-exists('at-error')`
+/// to detect support.
+///
+/// @param {String} $message - Message to log
+///
+@function im-log($message) {
+    @if feature-exists('at-error') {
+        @error $message;
+    } @else {
+        @warn $message;
+        $_: noop();
+    }
+
+    @return $message;
+}
+
+
+/// Get operator of an expression
+///
+/// @param {String} $expression - Expression to extract operator from
+///
+/// @return {String} - Any of `>=`, `>`, `<=`, `<`, `≥`, `≤`
+///
+@function get-expression-operator($expression) {
+    @each $operator in ('>=', '>', '<=', '<', '≥', '≤') {
+        @if str-index($expression, $operator) {
+            @return $operator;
+        }
+    }
+
+    // It is not possible to include a mixin inside a function, so we have to
+    // rely on the `im-log(..)` function rather than the `log(..)` mixin. Because
+    // functions cannot be called anywhere in Sass, we need to hack the call in
+    // a dummy variable, such as `$_`. If anybody ever raise a scoping issue with
+    // Sass 3.3, change this line in `@if im-log(..) {}` instead.
+    $_: im-log('No operator found in `#{$expression}`.');
+}
+
+
+///
+/// Get dimension of an expression, based on a found operator
+///
+/// @param {String} $expression - Expression to extract dimension from
+/// @param {String} $operator - Operator from `$expression`
+///
+/// @return {String} - `width` or `height` (or potentially anything else)
+///
+@function get-expression-dimension($expression, $operator) {
+    $operator-index: str-index($expression, $operator);
+    $parsed-dimension: str-slice($expression, 0, $operator-index - 1);
+    $dimension: 'width';
+
+    @if str-length($parsed-dimension) > 0 {
+        $dimension: $parsed-dimension;
+    }
+
+    @return $dimension;
+}
+
+
+///
+/// Get dimension prefix based on an operator
+///
+/// @param {String} $operator - Operator
+///
+/// @return {String} - `min` or `max`
+///
+@function get-expression-prefix($operator) {
+    @return if(index(('<', '<=', '≤'), $operator), 'max', 'min');
+}
+
+
+///
+/// Get value of an expression, based on a found operator
+///
+/// @param {String} $expression - Expression to extract value from
+/// @param {String} $operator - Operator from `$expression`
+///
+/// @return {Number} - A numeric value
+///
+@function get-expression-value($expression, $operator) {
+    $operator-index: str-index($expression, $operator);
+    $value: str-slice($expression, $operator-index + str-length($operator));
+
+    @if map-has-key($breakpoints, $value) {
+        $value: map-get($breakpoints, $value);
+    } @else {
+        $value: to-number($value);
+    }
+
+    $interval: map-get($unit-intervals, unit($value));
+
+    @if not $interval {
+        // It is not possible to include a mixin inside a function, so we have to
+        // rely on the `im-log(..)` function rather than the `log(..)` mixin. Because
+        // functions cannot be called anywhere in Sass, we need to hack the call in
+        // a dummy variable, such as `$_`. If anybody ever raise a scoping issue with
+        // Sass 3.3, change this line in `@if im-log(..) {}` instead.
+        $_: im-log('Unknown unit `#{unit($value)}`.');
+    }
+
+    @if $operator == '>' {
+        $value: $value + $interval;
+    } @else if $operator == '<' {
+        $value: $value - $interval;
+    }
+
+    @return $value;
+}
+
+
+///
+/// Parse an expression to return a valid media-query expression
+///
+/// @param {String} $expression - Expression to parse
+///
+/// @return {String} - Valid media query
+///
+@function parse-expression($expression) {
+    // If it is part of $media-expressions, it has no operator
+    // then there is no need to go any further, just return the value
+    @if map-has-key($media-expressions, $expression) {
+        @return map-get($media-expressions, $expression);
+    }
+
+    $operator: get-expression-operator($expression);
+    $dimension: get-expression-dimension($expression, $operator);
+    $prefix: get-expression-prefix($operator);
+    $value: get-expression-value($expression, $operator);
+
+    @return '(#{$prefix}-#{$dimension}: #{$value})';
+}
+
+/// Add `$unit` to `$value`
+///
+/// @param {Number} $value - Value to add unit to
+/// @param {String} $unit - String representation of the unit
+///
+/// @return {Number} - `$value` expressed in `$unit`
+///
+@function to-length($value, $unit) {
+    $units: ('px': 1px, 'cm': 1cm, 'mm': 1mm, '%': 1%, 'ch': 1ch, 'pc': 1pc, 'in': 1in, 'em': 1em, 'rem': 1rem, 'pt': 1pt, 'ex': 1ex, 'vw': 1vw, 'vh': 1vh, 'vmin': 1vmin, 'vmax': 1vmax);
+
+    @if not index(map-keys($units), $unit) {
+        $_: im-log('Invalid unit `#{$unit}`.');
+    }
+
+    @return $value * map-get($units, $unit);
+}
+
+
+/// Casts a string into a number
+///
+/// @param {String | Number} $value - Value to be parsed
+///
+/// @return {Number}
+///
+@function to-number($value) {
+    @if type-of($value) == 'number' {
+        @return $value;
+    } @else if type-of($value) != 'string' {
+        $_: im-log('Value for `to-number` should be a number or a string.');
+    }
+
+    $first-character: str-slice($value, 1, 1);
+    $result: 0;
+    $digits: 0;
+    $minus: ($first-character == '-');
+    $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+
+    // Remove +/- sign if present at first character
+    @if ($first-character == '+' or $first-character == '-') {
+        $value: str-slice($value, 2);
+    }
+
+    @for $i from 1 through str-length($value) {
+        $character: str-slice($value, $i, $i);
+
+        @if not (index(map-keys($numbers), $character) or $character == '.') {
+            @return to-length(if($minus, -$result, $result), str-slice($value, $i))
+        }
+
+        @if $character == '.' {
+            $digits: 1;
+        } @else if $digits == 0 {
+            $result: $result * 10 + map-get($numbers, $character);
+        } @else {
+            $digits: $digits * 10;
+            $result: $result + map-get($numbers, $character) / $digits;
+        }
+    }
+
+    @return if($minus, -$result, $result);
+}

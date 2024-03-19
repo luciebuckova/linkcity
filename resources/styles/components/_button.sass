@@ -1,0 +1,120 @@
+$button: '.Button'
+
+.Button,
+.wp-element-button
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  text-align: center
+  gap: .75rem
+  padding: var(--buttonPadding, 1em 1.75em) !important
+  min-width: 14.5rem
+  border-radius: .25rem
+  border: 0
+  outline: 0
+  font-weight: 700
+  line-height: 1.25rem
+  text-decoration: none
+  cursor: pointer
+  transition: var(--animationBase)
+
+  &[disabled]
+    pointer-events: none
+    opacity: .8
+
+  & > span
+    position: relative
+    //transition: inherit
+
+    &:empty
+      display: none
+
+  @include on-event()
+    text-decoration: none
+
+  &Icon
+    height: 1em
+    width: auto
+    transition: inherit
+
+    &--left
+      order: -1
+
+    &--arrow
+      #{$button}:hover &,
+      #{$button}:focus &
+        transform: translateX(.25em)
+
+        & + span
+          transform: translateX(-.125em)
+
+  /* ===== Styles ===== */
+
+  &--primary,
+  .wp-block-button:not([class*="is-style"]) > &
+    color: var(--colorLight)
+    border: .125rem solid var(--colorPrimary)
+    background: var(--colorPrimary)
+
+    @include on-event()
+      color: var(--colorLight)
+      border-color: var(--colorSecondary)
+      background: var(--colorSecondary)
+
+  &--outline,
+  .is-style-outline > &
+    border: .125rem solid var(--buttonBorderColor, var(--colorPrimary))
+    background: transparent
+    color: inherit
+
+    @include on-event()
+      color: inherit
+      background: var(--buttonBorderColor, var(--colorPrimary))
+
+    &#{$button}--negative
+      --buttonBorderColor: var(--colorLight)
+
+      @include on-event()
+        color: var(--colorDark)
+
+  &--textLink
+    gap: .5rem
+    min-width: auto
+    padding: var(--buttonPadding, 0) !important
+    font-size: inherit
+    font-weight: 700
+    text-align: left
+    color: inherit
+    background: transparent
+
+    @include on-event()
+      color: inherit
+      opacity: .64
+
+      span
+        //transform: translate(-.25em, .125em)
+
+      #{$button}Icon
+        //transform: translate(.25em, -.125em)
+
+  &--icon
+    padding: var(--buttonIconPadding, .625em .75em) !important
+    min-width: auto
+
+    #{$button}Icon
+      height: var(--buttonIconSize, 1.5em)
+
+
+  /* ===== Sizes ===== */
+
+  &--small
+    --buttonPadding: 1em 2em
+    --buttonIconPadding: .375rem .625rem
+    --buttonIconSize: 1.125rem
+    gap: .5rem
+    font-size: .875rem
+    min-width: auto
+
+  &--wide
+    width: 100%
+    border-radius: 0

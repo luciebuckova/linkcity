@@ -1,0 +1,22 @@
+body.error404
+  main
+    flex: 1 0 0
+    position: relative
+    display: flex
+    flex-flow: column
+    justify-content: center
+    padding: 4em 0
+    text-align: center
+    overflow: hidden
+
+    @include media('>=md')
+      padding: 7em 0
+
+    h1
+      margin-bottom: .25em
+      font-size: calc(var(--textXxl) * 2.5)
+      font-weight: 700
+      color: inherit
+
+    .Button
+      margin-top: 2.5em

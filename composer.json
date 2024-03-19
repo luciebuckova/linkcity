@@ -1,0 +1,52 @@
+{
+  "name": "tamtomy/theme-starter",
+  "type": "wordpress-theme",
+  "description": "WordPress starter theme with a modern development workflow",
+  "license": "UNLICENSED",
+  "private": true,
+  "authors": [
+    {
+      "name": "Jakub Blana",
+      "email": "jakub@tamtomy.cz"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "blade-ui-kit/blade-icons": "^1.5",
+    "johnbillion/extended-cpts": "^5.0",
+    "roots/acorn": "^v3.2"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.7.1"
+  },
+  "suggest": {
+    "log1x/sage-directives": "A collection of useful Blade directives for WordPress and Sage (^1.0)."
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "post-autoload-dump": [
+      "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
+    ]
+  },
+  "extra": {
+    "acorn": {
+      "providers": [
+        "App\\Providers\\AssetsServiceProvider",
+        "App\\Providers\\PostTypesServiceProvider",
+        "App\\Providers\\ProjectServiceProvider",
+        "App\\Providers\\ThemeServiceProvider"
+      ]
+    }
+  }
+}

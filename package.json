@@ -1,0 +1,36 @@
+{
+    "name": "tamtomy-theme",
+    "private": true,
+    "browserslist": [
+        "defaults and supports es6-module"
+    ],
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "type": "module",
+    "scripts": {
+        "dev": "cross-env APP_ENV=development vite",
+        "build": "vite build",
+        "translate": "yarn translate:pot && yarn translate:update",
+        "translate:pot": "wp i18n make-pot . ./resources/lang/theme.pot --include=\"app,config,resources/\"",
+        "translate:update": "wp i18n update-po ./resources/lang/theme.pot",
+        "translate:compile": "yarn translate:mo && yarn translate:js",
+        "translate:js": "wp i18n make-json ./resources/lang --pretty-print",
+        "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang"
+    },
+    "devDependencies": {
+        "@types/node": "18.15.3",
+        "@vue/reactivity": "3.3.4",
+        "autoprefixer": "10.4.15",
+        "cross-env": "^7.0.3",
+        "postcss": "^8.4.23",
+        "rollup-plugin-output-manifest": "^2.0.0",
+        "sass": "^1.65.1",
+        "typescript": "^5.1.6",
+        "vite": "^4.4.9",
+        "vite-plugin-live-reload": "^3.0.2"
+    },
+    "dependencies": {
+        "petite-vue": "^0.4.1"
+    }
+}

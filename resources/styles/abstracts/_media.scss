@@ -1,0 +1,102 @@
+$breakpoints: (
+    'xxs': 25rem, // ~400px
+    'xs': 32rem, // ~512px
+    'sm': 48rem, // ~768px
+    'md': 64rem, // ~1024px
+    'lg': 80rem, // ~1280px
+    'xl': 90rem, // ~1440px
+    'xxl': 105rem // ~1680px
+) !default;
+
+$media-expressions: (
+    'screen': 'screen',
+    'print': 'print',
+    'handheld': 'handheld',
+    'landscape': '(orientation: landscape)',
+    'portrait': '(orientation: portrait)',
+    'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)',
+    'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)'
+) !default;
+
+
+$unit-intervals: (
+    'px': 1,
+    'em': 0.01,
+    'rem': 0.01,
+    '': 0
+) !default;
+
+$im-media-support: true !default;
+
+$im-no-media-breakpoint: 'desktop' !default;
+
+$im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
+
+
+///
+/// Generates a media query based on a list of conditions
+///
+/// @param {Arglist}  $conditions  - Media query conditions
+///
+/// @example scss - With a single set breakpoint
+///  @include media('>phone') { }
+///
+/// @example scss - With two set breakpoints
+///  @include media('>phone', '<=tablet') { }
+///
+/// @example scss - With custom values
+///  @include media('>=358px', '<850px') { }
+///
+/// @example scss - With set breakpoints with custom values
+///  @include media('>desktop', '<=1350px') { }
+///
+/// @example scss - With a static expression
+///  @include media('retina2x') { }
+///
+/// @example scss - Mixing everything
+///  @include media('>=350px', '<tablet', 'retina3x') { }
+///
+@mixin media($conditions...) {
+    @if ($im-media-support and length($conditions) == 0) or
+      (not $im-media-support and im-intercepts-static-breakpoint($conditions...)) {
+        @content;
+    } @else if ($im-media-support and length($conditions) > 0) {
+        @media #{unquote(parse-expression(nth($conditions, 1)))} {
+            // Recursive call
+            @include media(slice($conditions, 2)...) {
+                @content;
+            }
+        }
+    }
+}
+
+/// Determines whether a list of conditions is intercepted by the static breakpoint.
+///
+/// @param {Arglist}   $conditions  - Media query conditions
+///
+/// @return {Boolean} - Returns true if the conditions are intercepted by the static breakpoint
+///
+@function im-intercepts-static-breakpoint($conditions...) {
+    $no-media-breakpoint-value: map-get($breakpoints, $im-no-media-breakpoint);
+
+    @if not $no-media-breakpoint-value {
+        @if im-log('`#{$im-no-media-breakpoint}` is not a valid breakpoint.') {}
+    }
+
+    @each $condition in $conditions {
+        @if not map-has-key($media-expressions, $condition) {
+            $operator: get-expression-operator($condition);
+            $prefix: get-expression-prefix($operator);
+            $value: get-expression-value($condition, $operator);
+
+            @if ($prefix == 'max' and $value <= $no-media-breakpoint-value) or
+          ($prefix == 'min' and $value > $no-media-breakpoint-value) {
+                @return false;
+            }
+        } @else if not index($im-no-media-expressions, $condition) {
+            @return false;
+        }
+    }
+
+    @return true;
+}

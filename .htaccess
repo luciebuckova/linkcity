@@ -1,0 +1,4 @@
+<IfModule headers_module>
+	Header set Cache-Control "public, max-age=31536000"
+	Header unset ETag
+</IfModule>

@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es2022",
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "baseUrl": "./resources",
+        "outDir": "./public",
+        "paths": {
+            "@images": ["images"],
+            "@scripts": ["scripts"],
+            "@styles": ["styles"]
+        },
+        "types": [
+            "node",
+            "vite/client"
+        ]
+    },
+    "include": [ "resources" ],
+    "exclude": [ "node_modules" ]
+}

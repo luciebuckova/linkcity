@@ -1,0 +1,73 @@
+h1, h2, h3, h4, h5, h6, form legend
+  font-weight: 300
+  color: var(--colorTextHeading, inherit)
+  line-height: var(--headingLineHeight)
+  margin-bottom: var(--spaceXs)
+
+  small
+    display: block
+    font-size: .625em
+
+/* text size */
+h1, .u-textXxl
+  font-size: var(--textXxl)
+  line-height: var(--headingLineHeight)
+
+  &:not([class])
+    font-size: var(--contentTextXxl, var(--textXxl))
+
+h2, .u-textXl
+  font-size: var(--textXl)
+  line-height: var(--headingLineHeight)
+  text-transform: uppercase
+  margin-bottom: 2.5rem
+
+  &:not([class])
+    font-size: var(--contentTextXl, var(--textXl))
+
+h3, .u-textLg
+  font-size: var(--textLg)
+  line-height: var(--headingLineHeight)
+  text-transform: uppercase
+  margin-bottom: 1.5rem
+
+  &:not([class])
+    font-size: var(--contentTextLg, var(--textLg))
+
+h4, .u-textMd
+  font-size: var(--textMd)
+  line-height: var(--headingLineHeight)
+  margin-bottom: 1.25rem
+
+  &:not([class])
+    font-size: var(--contentTextMd, var(--textMd))
+
+h5, .u-textRg
+  font-size: var(--textRg)
+  line-height: var(--headingLineHeight)
+  margin-bottom: 1rem
+
+  &:not([class])
+    font-size: var(--contentTextRg, var(--textRg))
+
+h6
+  font-size: var(--textBaseSize)
+  margin-bottom: 1rem
+
+.u-textSm, small
+  font-size: var(--textSm)
+
+.u-textXs
+  font-size: var(--textXs)
+
+p
+  line-height: var(--bodyLineHeight)
+
+a
+  color: var(--colorLinkText)
+  text-decoration: none
+
+  &:hover,
+  &:focus
+    text-decoration: underline
+    color: var(--colorLinkTextActive)

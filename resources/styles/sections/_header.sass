@@ -1,0 +1,79 @@
+.Header
+  &Inner
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+  /* == MenuOpener == */
+  @mixin pill()
+    content: ''
+    position: absolute
+    width: 100%
+    height: 12%
+    background: currentColor
+    border-radius: var(--headerBurgerSize)
+    transition: all .48s cubic-bezier(.1, .9, 0, 1.2), opacity .12s ease-out
+
+  &Burger
+    $burger: &
+    --headerBurgerSize: 2em
+    all: unset
+    box-sizing: inherit
+    position: relative
+    width: var(--headerBurgerSize)
+    aspect-ratio: 1
+    margin: -.125em 0 .375em auto
+    z-index: 10
+
+    @include media('>=md')
+      display: none
+
+    &:before
+      @include pill
+      top: 10%
+      right: 0
+
+    &:after
+      content: ""
+      position: absolute
+      inset: -.5em
+      z-index: -1
+
+    &-inner
+      position: absolute
+      inset: 0
+      display: grid
+      place-items: center
+
+      &:before,
+      &:after
+        @include pill
+
+    &-label
+      position: absolute
+      inset: auto auto -.25rem 50%
+      font-size: .625em
+      font-weight: 700
+      letter-spacing: .04em
+      line-height: 1
+      opacity: .8
+      translate: -50% 0
+      transform-origin: left
+      transition: scale .48s cubic-bezier(.1, .9, 0, 1.2), opacity .24s ease-out
+
+    &.is-opened
+      &:before
+        width: 0
+        opacity: 0
+        transition: all .48s cubic-bezier(.1, .9, 0, 1.2), opacity .12s ease-out .12s
+
+      #{$burger}-inner
+        &:before
+          rotate: 135deg
+
+        &:after
+          rotate: 45deg
+
+      #{$burger}-label
+        scale: 0 1
+        opacity: 0
