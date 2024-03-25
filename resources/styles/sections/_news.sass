@@ -1,0 +1,28 @@
+.Home
+    &News
+        &-inner
+            padding-top: var(--paddingRg)
+            padding-bottom: var(--paddingRg)
+
+        &-buttons
+            gap: 0.75rem
+
+        &-button
+            width: 2.5rem
+            height: 2.5rem
+            border-radius: 50%
+
+        &-new
+            margin-top: var(--spaceMd)
+            margin-bottom: var(--spaceMd)
+            gap: 2.5rem
+            flex-direction: column
+
+            @include media('>=md')
+                flex-direction: row
+
+        &-image
+            flex-shrink: 0
+
+            img
+                max-width: 100%

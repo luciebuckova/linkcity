@@ -1,15 +1,25 @@
 \:root
-  @include defineColor(--colorPrimary,      #163072)
-  @include defineColor(--colorSecondary,    #E4003C)
-  @include defineColor(--colorBgLight,      #F6F6F6)
-  @include defineColor(--colorOutline,      #E6E6E6)
-  @include defineColor(--colorOutlineDark,  #8E8E8E)
-  @include defineColor(--colorDark,         #262626)
-  @include defineColor(--colorLight,        #FFFFFF)
+  @include defineColor(--colorPureWhite,    #FFFFFF)
+  @include defineColor(--colorWildSand,     #F4F4F4)
+  @include defineColor(--colorOsloGray,     #888888)
+  @include defineColor(--colorFiord,        #4E5B70)
+  @include defineColor(--colorMineShaft,    #333333)
+  @include defineColor(--colorClementine,   #EC6C00)
+  @include defineColor(--colorAtlantis,     #8DC21F)
+  @include defineColor(--colorFountainBlue, #4CA8AE)
+  @include defineColor(--colorAstronaut,    #253469)
+
+  --colorPrimary: var(--colorClementine)
+  --colorSecondary: var(--colorAstronaut)
+  --colorBgLight: var(--colorWildSand)
+  --colorOutline: var(--colorOsloGray)
+  --colorOutlineDark: var(--colorFiord)
+  --colorDark: var(--colorMineShaft)
+  --colorLight: var(--colorPureWhite)
 
   --colorText: var(--colorDark)
-  --colorTextSecondary: #666666
-  --colorTextFaded: #999999
+  --colorTextSecondary: var(--colorLight)
+  --colorTextFaded: var(--colorOsloGray)
 
 .c-primary
   color: var(--colorPrimary)

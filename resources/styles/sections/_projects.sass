@@ -1,0 +1,77 @@
+.Home
+    &Projects
+        &-inner
+            padding-top: var(--paddingRg)
+            padding-bottom: var(--paddingRg)
+
+        &-top
+            flex-direction: column
+            gap: 1.25rem
+            @include media('>=md')
+                flex-direction: row
+                justify-content: space-between
+
+        &-categories
+            font-size: 1rem
+            font-weight: 300
+            gap: 0.75rem
+
+            @include media('>=sm')
+                font-size: var(--textRg)
+                gap: 1.25rem
+
+            @include media('>=lg')
+                gap: 2.5rem
+
+        &-link
+            padding-bottom: var(--spaceSm)
+            border-bottom: 0.125rem solid transparent
+
+            &:hover
+                border-color: var(--colorPrimary)
+
+        &-link.is-active
+            color: var(--colorPrimary)
+            font-weight: 600
+            border-color: var(--colorPrimary)
+
+            sup
+                color: var(--colorPrimary)
+
+        &-list
+            margin-top: var(--spaceMd)
+            margin-bottom: var(--spaceMd)
+            display: grid
+            grid-template-columns: 1fr
+            gap: 1.25rem
+
+            @include media('>=sm')
+                grid-template-columns: 1fr 1fr
+
+            @include media('>=lg')
+                grid-template-columns: 1fr 1fr 1fr
+
+        &-project
+            figure
+                background: var(--colorPrimary)
+
+            figure img
+                width: 100%
+                opacity: 1
+                -webkit-transition: var(--animationBase)
+                transition: var(--animationBase)
+
+            &:hover img
+                opacity: .5
+
+            &:hover .HomeProjects-button
+                color: var(--colorPrimary)
+                font-weight: 600
+
+        &-button
+            color: var(--colorOutlineDark)
+
+.Project
+    &-info
+        margin-top: var(--spaceSm)
+        margin-bottom: calc(var(--spaceXs) / 2)

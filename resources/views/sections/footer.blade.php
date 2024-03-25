@@ -1,12 +1,41 @@
+<!-- Footer Section -->
 <footer class="Footer">
     @unless(is_404())
-    <div class="FooterInner u-frame">
-
+    <div class="FooterInner">
+        <div class="u-frame"> 
+            <div class="FooterInner-top u-flex u-flexJustifyStart u-flexAlignItemsCenter">     
+                <a class="FooterLogo" href="{{ home_url('/') }}">
+                    <img src="@asset('logo.svg')" height="40" alt="{!! $siteName !!}">
+                </a>     
+            </div> 
+            <div class="u-flex FooterInner-content u-flexJustifyBetween">
+                <div class="FooterInner-links u-flex">
+                    <a href="#" class="u-inlineLink">Domů</a>
+                    <a href="#" class="u-inlineLink">O nás</a>
+                    <a href="#" class="u-inlineLink">Naše projekty</a>
+                    <a href="#" class="u-inlineLink">Aktuality</a>
+                    <a href="#" class="u-inlineLink">Kontakt</a>
+                </div>
+                <div class="FooterInner-links u-flex">
+                    <p class="u-textBold">Sociální sítě</p>
+                    <a href="#" class="u-inlineLink">O nás</a>
+                    <a href="#" class="u-inlineLink">Naše projekty</a>
+                    <a href="#" class="u-inlineLink">Aktuality</a>
+                    <a href="#" class="u-inlineLink">Kontakt</a>
+                </div>
+                <div class="FooterInner-links u-flex">
+                    <p class="u-textBold">Adresa</p>
+                    <p>Na Harfě 337/3,<br>Praha 9</p>
+                    <a href="#" class="u-inlineLink">+420 226 056 605</a>
+                    <a href="#" class="u-inlineLink">info@linkcity.cz</a>
+                </div>
+            </div> 
+        </div>       
     </div>
     @endunless
     <div class="Footer-bottomBar">
         <div class="u-frame">
-            <span class="Footer-copyright">© {{ date('Y') }}<br> <small>{{ $siteName }}</small></span>
+            <span class="Footer-copyright"><span class="u-textBold">© 2023</span><br><small>Všechna práva vyhrazená.</small></span>
             <div class="Footer-agency">
                 <span><a href="https://www.tamtomy.cz/webove-stranky-na-ktere-budete-hrdi/" target="_blank" rel="noopener" class="u-inlineLink"><?php esc_html_e("Webové stránky", "ttm"); ?></a> <?php esc_html_e("vytvořilo", "ttm"); ?></span>
                 <a href="https://www.tamtomy.cz/" target="_blank" title="TamToMy Agency" rel="noopener" class="Footer-agencyLogo">

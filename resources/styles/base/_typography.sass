@@ -2,7 +2,6 @@ h1, h2, h3, h4, h5, h6, form legend
   font-weight: 300
   color: var(--colorTextHeading, inherit)
   line-height: var(--headingLineHeight)
-  margin-bottom: var(--spaceXs)
 
   small
     display: block
@@ -11,31 +10,32 @@ h1, h2, h3, h4, h5, h6, form legend
 /* text size */
 h1, .u-textXxl
   font-size: var(--textXxl)
-  line-height: var(--headingLineHeight)
+  font-weight: 700
+  margin-bottom: var(--spaceSm)
 
   &:not([class])
     font-size: var(--contentTextXxl, var(--textXxl))
 
 h2, .u-textXl
   font-size: var(--textXl)
+  font-weight: 500
   line-height: var(--headingLineHeight)
   text-transform: uppercase
-  margin-bottom: 2.5rem
 
   &:not([class])
     font-size: var(--contentTextXl, var(--textXl))
 
 h3, .u-textLg
   font-size: var(--textLg)
+  font-weight: 700
   line-height: var(--headingLineHeight)
-  text-transform: uppercase
-  margin-bottom: 1.5rem
 
   &:not([class])
     font-size: var(--contentTextLg, var(--textLg))
 
 h4, .u-textMd
   font-size: var(--textMd)
+  font-weight: 700
   line-height: var(--headingLineHeight)
   margin-bottom: 1.25rem
 
@@ -44,15 +44,19 @@ h4, .u-textMd
 
 h5, .u-textRg
   font-size: var(--textRg)
+  font-weight: 700
   line-height: var(--headingLineHeight)
   margin-bottom: 1rem
+  margin-top: 0.5rem
 
   &:not([class])
     font-size: var(--contentTextRg, var(--textRg))
 
 h6
   font-size: var(--textBaseSize)
-  margin-bottom: 1rem
+  font-weight: 700
+  margin-bottom: 0.75rem
+  margin-top: 0.25rem
 
 .u-textSm, small
   font-size: var(--textSm)
@@ -63,11 +67,14 @@ h6
 p
   line-height: var(--bodyLineHeight)
 
+.u-textBold
+  font-weight: 600
+
 a
   color: var(--colorLinkText)
   text-decoration: none
 
-  &:hover,
-  &:focus
-    text-decoration: underline
-    color: var(--colorLinkTextActive)
+sup, .u-note
+  font-size: 0.75rem
+  font-weight: 400
+  color: var(--colorTextFaded)

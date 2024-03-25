@@ -1,0 +1,18 @@
+{
+  "app": {
+    "js": [
+      "app-cdb547e8.js"
+    ],
+    "css": [
+      "app-1daf9588.css"
+    ],
+    "dependencies": []
+  },
+  "editor": {
+    "js": [
+      "editor-4ed993c7.js"
+    ],
+    "css": [],
+    "dependencies": []
+  }
+}

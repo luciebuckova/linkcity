@@ -1,0 +1,27 @@
+.Home
+    &About
+        &-inner
+            padding-top: var(--paddingRg)
+            padding-bottom: var(--paddingRg)
+            gap: 3rem
+            flex-direction: column
+
+            p
+                margin-bottom: var(--spaceRg)
+
+            h3
+                margin-bottom: var(--spaceSm)
+
+            h5
+                margin-top: 0
+                margin-bottom: var(--spaceXs)
+
+            @include media('>=md')
+                flex-direction: row
+                gap: 7.5rem
+
+        &-image
+            flex-shrink: 0
+
+            img
+                max-width: 100%

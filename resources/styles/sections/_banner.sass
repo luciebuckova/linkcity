@@ -1,0 +1,26 @@
+.Home
+    &Banner
+        background-color: var(--colorSecondary)
+        background-image: url("../images/banner.png")
+        background-position: top right
+        background-size: cover
+        background-repeat: no-repeat
+        color: var(--colorLight)
+
+        @include media('>=md')
+            background-size: contain
+
+        &-inner
+            padding-top: var(--paddingMd)
+            padding-bottom: var(--paddingMd)
+            flex-direction: column
+            gap: 1.25rem
+
+            h3
+                margin-bottom: var(--spaceXs)
+
+            p
+                max-width: 48.75rem
+
+            @include media('>=md')
+                flex-direction: row

@@ -1,0 +1,42 @@
+.Home
+    &Hero
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), linear-gradient(153.55deg, rgba(0, 0, 0, 0.4) 39.24%, rgba(0, 0, 0, 0) 59.89%), url("../images/hero.jpeg")
+        background-size: cover
+        background-position: center
+
+        @include media('>=sm')
+            height: 52.5rem
+
+        &-inner
+            color: var(--colorLight)
+            padding-top: var(--paddingLg)
+            padding-bottom: calc(var(--paddingSm) * 2)
+            height: 100%
+            flex-direction: column
+
+        &-subtitle
+            max-width: 29.8125rem
+
+        &-button
+            margin-top: var(--spaceMd)
+
+        &-bottom
+            align-items: flex-end
+
+            @include media('>=sm')
+                align-items: center
+
+        &-pagination
+            gap: 1rem
+
+        &-line
+            width: 5.8125rem
+            height: 0.125rem
+            background-color: var(--colorPrimary)
+
+        &-socials
+            flex-direction: column
+            gap: 1.25rem
+
+            @include media('>=sm')
+                flex-direction: row

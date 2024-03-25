@@ -1,5 +1,5 @@
-$font-family: 'OpenSans' !default
-$font-list: ( $font-family: (  )) // 'regular': 400
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap')
+$font-family: 'Montserrat' !default
 
 \:root
   --fontFamily: #{$font-family}
@@ -8,30 +8,21 @@ $font-list: ( $font-family: (  )) // 'regular': 400
   --textBaseSize: 1rem
   --textScaleRatio: 1.2
 
-  --bodyLineHeight: 1.5
-  --headingLineHeight: 1.3
+  --bodyLineHeight: 1.6
+  --headingLineHeight: 1.4
 
   /* type scale */
-  --textXs:   calc(1em / (var(--textScaleRatio) * var(--textScaleRatio)))
-  --textSm:   calc(1em / var(--textScaleRatio))
-  --textRg:   1.125em
-  --textMd:   1.25em
-  --textLg:   1.5em
-  --textXl:   2em
-  --textXxl:  2.5em
+  --textXs: calc(1em / (var(--textScaleRatio) * var(--textScaleRatio)))
+  --textSm: calc(1em / var(--textScaleRatio))
+  --textRg: 1.125em
+  --textMd: 1.25em
+  --textLg: 1.5em
+  --textXl: 2em
+  --textXxl: 2.5em
 
   @include media('>=sm')
-    --textRg:   1.25em
-    --textMd:   1.5em
-    --textLg:   2.25em
-    --textXl:   3em
-    --textXxl:  4em
-
-@each $font, $fontFamilies in $font-list
-  @each $fontFamily, $fontWeight in $fontFamilies
-    @font-face
-      font-family: #{$font}
-      src: url('./../fonts/#{$font}-#{$fontFamily}.woff2') format('woff2')
-      font-weight: #{$fontWeight}
-      font-style: normal
-      font-display: fallback
+    --textRg: 1.5em
+    --textMd: 2em
+    --textLg: 2.5em
+    --textXl: 3em
+    --textXxl: 4em

@@ -1,12 +1,40 @@
 .Footer
   margin-top: auto
   font-size: .875em
+  color: var(--colorLight)
+
+  a
+    color: inherit
+    transition: opacity .24s ease
+
+    &.u-inlineLink:hover
+      opacity: .4
+
+  &Inner
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), var(--colorSecondary)
+    padding-top: var(--paddingRg)
+    padding-bottom: var(--paddingRg)
+
+    &-top
+      margin-bottom: var(--spaceMd)
+
+    &-content
+      max-width: 64,5rem
+      flex-direction: column
+      gap: 2.5rem
+
+      @include media('>=sm')
+        flex-direction: row
+
+    &-links
+      flex-direction: column
+      gap: 1rem
 
   &-bottomBar
     padding-top: 2em
     padding-bottom: 2em
     line-height: 1.24
-    background: var(--Footer-bg, var(--colorLight))
+    background: var(--Footer-bg, var(--colorSecondary))
 
     @include media('<xs')
       line-height: 1
@@ -16,16 +44,8 @@
       align-items: center
       justify-content: space-between
 
-  a
-    color: inherit
-    transition: opacity .24s ease
-
-    &.u-inlineLink:hover
-      opacity: .4
-
   small
     font-size: .75em
-    opacity: .64
 
   &-agency
     display: flex

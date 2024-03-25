@@ -7,20 +7,20 @@ $button: '.Button'
   justify-content: center
   text-align: center
   gap: .75rem
-  padding: var(--buttonPadding, 1em 1.75em) !important
-  min-width: 14.5rem
-  border-radius: .25rem
+  padding: var(--buttonPadding, 1.125em 1.875em) !important
+  width: 12.5rem
   border: 0
   outline: 0
-  font-weight: 700
-  line-height: 1.25rem
+  font-weight: 600
+  line-height: 1rem
   text-decoration: none
   cursor: pointer
   transition: var(--animationBase)
 
   &[disabled]
+    background-color: var(--colorBgLight)
+    color: var(--colorOutline)
     pointer-events: none
-    opacity: .8
 
   & > span
     position: relative
@@ -63,13 +63,13 @@ $button: '.Button'
 
   &--outline,
   .is-style-outline > &
-    border: .125rem solid var(--buttonBorderColor, var(--colorPrimary))
+    border: .0625rem solid var(--buttonBorderColor, var(--colorOutline))
     background: transparent
-    color: inherit
+    color: var(--colorTextFaded)
 
     @include on-event()
-      color: inherit
-      background: var(--buttonBorderColor, var(--colorPrimary))
+      color: var(--colorLight)
+      background: var(--buttonBorderColor, var(--colorOutline))
 
     &#{$button}--negative
       --buttonBorderColor: var(--colorLight)
@@ -79,7 +79,7 @@ $button: '.Button'
 
   &--textLink
     gap: .5rem
-    min-width: auto
+    width: auto
     padding: var(--buttonPadding, 0) !important
     font-size: inherit
     font-weight: 700
@@ -98,12 +98,28 @@ $button: '.Button'
         //transform: translate(.25em, -.125em)
 
   &--icon
-    padding: var(--buttonIconPadding, .625em .75em) !important
-    min-width: auto
+    padding: var(--buttonIconPadding, .5em 1em) !important
+    width: fit-content
+    font-weight: 400
+    color: var(--colorLight)
+    line-height: var(--bodyLineHeight)
+    background-color: var(--colorPrimary)
 
     #{$button}Icon
       height: var(--buttonIconSize, 1.5em)
 
+  &--alternative
+    padding: var(--buttonIconPadding, .5em 1em) !important
+    width: fit-content
+    font-weight: 400
+    color: var(--colorPrimary)
+    border: 1px solid var(--colorPrimary)
+    line-height: var(--bodyLineHeight)
+    background-color: rgba(236, 108, 0, 0.08)
+    margin-top: 1rem
+
+    #{$button}Icon
+      height: var(--buttonIconSize, 1.5em)
 
   /* ===== Sizes ===== */
 

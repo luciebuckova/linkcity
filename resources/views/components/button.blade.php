@@ -10,6 +10,8 @@
         'primary' => 'Button--primary',
         'alternative' => 'Button--alternative',
         'outline' => 'Button--outline',
+        'text' => 'Button--textLink',
+        'icon' => 'Button--icon',
     ];
 @endphp
 

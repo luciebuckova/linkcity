@@ -1,9 +1,9 @@
 \:root
   // CONTENT
   --sizeContentOffset: 1.25rem
-  --sizeContentWidth: 102.5rem
-  --sizeContentWidthMedium: 92.5rem
-  --sizeContentWidthNarrow: 76.5rem
+  --sizeContentWidth: 73.75rem
+  --sizeContentWidthMedium: 73.75rem
+  --sizeContentWidthNarrow: 73.75rem
 
   // INPUTS
   --sizeInputFont: var(--textSm)
@@ -20,3 +20,24 @@
   --sizeButtonPadding: var(--sizeButtonPaddingVertical) var(--sizeButtonPaddingHorizontal)
   --sizeButtonBorder: 1px
   --sizeButtonBorderRadius: 0
+
+  // PADDING 
+  --paddingSm: 1.25rem
+  --paddingRg: 2.5rem
+  --paddingMd: 2.5rem
+  --paddingLg: 6.125rem
+
+  @include media('>=sm')
+    --paddingRg: 5rem
+    --paddingMd: 6.25rem
+    --paddingLg: 12.25rem
+
+  // SPACING
+  --spaceXs: 0.5rem
+  --spaceSm: 0.75rem
+  --spaceRg: 1.5rem
+  --spaceMd: 2rem
+
+  @include media('>=sm')
+    --spaceRg: 3rem
+    --spaceMd: 4rem
